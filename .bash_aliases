@@ -1,0 +1,8 @@
+alias bc='bc -l'
+alias lh='ls -lh'
+alias lha='ls -lha'
+alias mkdir_now='date +%Y%m%d%H%M | xargs mkdir'
+alias :q='echo This is not Vim you silly fool'
+alias :w='echo This is not Vim you silly fool'
+alias :wq='echo This is not Vim you silly fool'
+alias pls='sudo $(history -p !!); history -d $((HISTCMD-1))'

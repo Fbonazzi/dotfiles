@@ -1,0 +1,73 @@
+general {
+  output_format = "i3bar"
+  colors = true
+  # Gruvbox colors
+  # bright_green
+  color_good = "#b8bb26"
+  # neutral_red
+  #color_bad = "#cc241d"
+  color_bad = "#9d0006"
+  # neutral_yellow
+  color_degraded = "#d79921"
+
+  interval = 1
+}
+
+
+order += "ethernet eth0"
+order += "disk /"
+order += "run_watch DHCP"
+order += "run_watch VPN"
+order += "cpu_temperature 0"
+order += "cpu_usage"
+order += "load"
+order += "time"
+
+wireless wlan0 {
+  format_up = "W: (%quality at %essid) %ip"
+  format_down = "W: down"
+}
+
+ethernet eth0 {
+  # if you use %speed, i3status requires root privileges
+  format_up = "E: %ip (%speed)"
+  format_down = "E: down"
+}
+
+battery 0 {
+  format = "%status %percentage %remaining"
+}
+
+run_watch DHCP {
+  pidfile = "/var/run/dhclient*.pid"
+}
+
+run_watch VPN {
+  pidfile = "/var/run/vpnc/pid"
+}
+
+time {
+  format = "%a %F %T"
+}
+
+load {
+  format = "%1min %5min %15min"
+}
+
+cpu_temperature 0 {
+  format = "T: %degrees °C"
+  path = "/sys/devices/platform/coretemp.0/temp2_input"
+}
+
+disk "/" {
+  #prefix_type = "binary"
+  threshold_type = "percentage_avail"
+  low_threshold = "10"
+  format = "%free"
+}
+
+cpu_usage {
+  format = "CPU: %usage"
+}
+
+# vim:filetype=sh
