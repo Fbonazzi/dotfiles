@@ -1,0 +1,58 @@
+" don't attempt to be compatible with vi
+set nocompatible
+
+" act like a man page
+set nomodifiable
+set readonly
+"let &titlestring = getline(1)
+set title
+
+" look like a pager
+set nolist
+set laststatus=0
+set cmdheight=1
+set nocursorline
+set ruler
+
+" disable line numbering
+set nonumber
+
+" searching
+" set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" scroll with the mouse scrollwheel
+set mouse=a
+
+" use syntax highlighting and formatting appropriate for man pages
+syntax enable
+set ft=man
+set ts=8
+
+" no menubar or toolbar
+set guioptions=aiMr
+
+" remap the usual pager commands
+nmap b <C-B><C-G>
+nmap q :q!<CR>
+"nmap <Up> <C-Y><C-G>
+"nmap <Down> <C-E><C-G>
+"nmap k <C-Y><C-G>
+"nmap j <C-E><C-G>
+
+" remap the spacebar
+" type two C-v's followed by two spaces
+nmap ^V  <C-F><C-G>
+
+" Autocommand to set title
+function GetManTitle()
+	let &titlestring = "man " . split(getline(1))[0]
+	set title
+endfunction
+
+augroup manpager
+	autocmd!
+	autocmd VimEnter * call GetManTitle()
+augroup END

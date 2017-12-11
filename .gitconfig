@@ -1,0 +1,9 @@
+[user]
+	name = Filippo Bonazzi
+	email = <redacted>
+[push]
+	default = simple
+[color]
+	ui = auto
+[grep]
+	lineNumber = true
