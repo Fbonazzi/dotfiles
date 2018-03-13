@@ -218,3 +218,18 @@ if command -v thefuck > /dev/null
 then
   eval $(thefuck --alias)
 fi
+
+# Open vim pointing at a specific line in the file
+function vim
+{
+  # If no arguments, more than one argument, or the filename
+  # does not contain a line number, pass through to VIM
+	if [[ $# -eq 0 || $# -gt 1 || ! "$1" =~ ^.*:[0-9]+$ ]]
+	then
+    command vim "$@"
+  else
+    lineno="${1##*:}"
+    filename="${1%:$lineno}"
+    command vim +"$lineno" -c "normal zt" "$filename"
+  fi
+}
