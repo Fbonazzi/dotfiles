@@ -219,6 +219,9 @@ then
   eval $(thefuck --alias)
 fi
 
+# Set vim as the preferred editor
+export EDITOR="vim"
+
 # Open vim pointing at a specific line in the file
 function vim
 {

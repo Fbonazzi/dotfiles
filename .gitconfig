@@ -3,7 +3,20 @@
 	email = <redacted>
 [push]
 	default = simple
+[core]
+	excludesfile = ~/.gitignore
+[credential]
+	helper = cache --timeout=28800
 [color]
 	ui = auto
 [grep]
 	lineNumber = true
+[core]
+	editor = vim
+	pager = less -x1,5
+[alias]
+	shortgraph = "log --graph --oneline --all --decorate --topo-order"
+	graph = "log --graph --all --decorate --topo-order"
+	simplegraph = "log --graph --all --decorate --topo-order --simplify-by-decoration"
+	stash-unapply = "!git stash show -p | git apply -R"
+	permission-reset = "!git diff -p | grep -E \"^(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply"

@@ -21,18 +21,6 @@ if [ -d "$HOME/bin" ] ; then
 	PATH="$HOME/bin:$PATH"
 fi
 
-# set PATH so the TeXLive manual install takes precedence over package manager stuff
-if [ -d "/usr/local/texlive/2016/bin/x86_64-linux" ]
-then
-	PATH="/usr/local/texlive/2016/bin/x86_64-linux:$PATH"
-fi
-
-# Add the Android SDK tools
-if [ -d "$HOME/Android/Sdk/platform-tools" ]
-then
-	PATH="$HOME/Android/Sdk/platform-tools:$PATH"
-fi
-
 # Add the pip user local directory
 if [ -d "$HOME/.local/bin" ]
 then
