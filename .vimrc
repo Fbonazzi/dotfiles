@@ -33,6 +33,9 @@ endif
 set title
 " Recognize filetype and indent consequently
 filetype plugin indent on
+" Enable Omnicompletion
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 
 "Auto chmod +x executable files
 "au BufWritePost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod a+x <afile> | endif | endif
@@ -55,7 +58,7 @@ let g:sh_fold_enabled=7
 nnoremap <space> za
 
 "Word count nei documenti di latex con F3
-map <F3> :w !detex -l \| wc -w<CR>
+"map <F3> :w !detex -l \| wc -w<CR>
 
 " More natural split opening
 set splitbelow
@@ -145,16 +148,16 @@ function! Insert_licenseinfo()
 	endif
 endfunction
 " Automatically insert license info when creating a new source file
-augroup licenseinfo
-	autocmd!
-	autocmd BufNewFile *.{c,h,py,sh} call Insert_licenseinfo()
-augroup END
+"augroup licenseinfo
+"	autocmd!
+"	autocmd BufNewFile *.{c,h,py,sh} call Insert_licenseinfo()
+"augroup END
 
 " Recognize m4 macro files in the Android tree
-augroup seandroid_macros
-	autocmd!
-	autocmd BufEnter * if @% =~# '_macros$' | set ft=m4 | endif
-augroup END
+"augroup seandroid_macros
+"	autocmd!
+"	autocmd BufEnter * if @% =~# '_macros$' | set ft=m4 | endif
+"augroup END
 
 " Toggle color scheme
 function! Toggle_color()
@@ -188,7 +191,8 @@ function! Format()
 		echom "No formatter defined"
 	endif
 endfunction
-nmap <silent> <F2> :call Format() <CR>
+" Disabled to work in Magneti Marelli without always breaking everything
+"nmap <silent> <F2> :call Format() <CR>
 
 " Highlight the cursor position
 function HighlightNearCursor()
@@ -224,3 +228,17 @@ set autoread
 augroup reload_file
 	autocmd CursorHold * checktime
 augroup END
+
+" Markdown stuff
+augroup markdown
+	autocmd!
+	" Recognize Markdown files
+	autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+	" Enable fenced code block syntax highlighting
+	let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'shell=sh', 'c', 'Makefile=make']
+augroup END
+
+" View a currently open buffer in a vertical split
+:command -nargs=1 -complete=buffer Vsb vertical sb <args>
+" Override the non-existing builtin :vsb command to call our Vsb command
+:cabbrev vsb <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Vsb' : 'vsb')<CR>

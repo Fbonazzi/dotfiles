@@ -1,2 +1,4 @@
 " Formatter
-let b:formatter="astyle --mode=c -A8 -T -S -p -H -k3 -W1 -xC80"
+" MM: Kernighan & Ritchie with 4-space tabs
+let b:formatter="astyle --mode=c --style=kr --indent=tab=4 --pad-header --unpad-paren"
+" You could use --align-pointer=name --align-reference=none"
