@@ -159,6 +159,12 @@ endfunction
 "	autocmd BufEnter * if @% =~# '_macros$' | set ft=m4 | endif
 "augroup END
 
+" Set the filetype to sh when editing the command line with <C-x><C-e>
+augroup cmdline_editor
+	autocmd!
+	autocmd BufEnter * if @% =~# '.*/bash-fc-' | set ft=sh | endif
+augroup END
+
 " Toggle color scheme
 function! Toggle_color()
 	if g:colors_name == "gruvbox"
