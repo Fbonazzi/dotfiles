@@ -197,8 +197,7 @@ function! Format()
 		echom "No formatter defined"
 	endif
 endfunction
-" Disabled to work in Magneti Marelli without always breaking everything
-"nmap <silent> <F2> :call Format() <CR>
+nmap <silent> <F2> :call Format() <CR>
 
 " Highlight the cursor position
 function HighlightNearCursor()
