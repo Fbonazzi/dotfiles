@@ -30,6 +30,7 @@ define reset-old
 			shopt -s dotglob;\
 			mv "$(OLD_DOTFILES)/$$i/*" "${HOME}/";\
 			shopt -u dotglob;\
+			rmdir "$$i"
 		done\
 	fi
 endef
