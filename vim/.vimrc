@@ -249,7 +249,7 @@ augroup END
 :cabbrev vsb <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Vsb' : 'vsb')<CR>
 
 " Automatically generate include guards in C headers
-function! s:insert_gates()
+function! s:insert_C_gates()
   let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
   execute "normal! i#ifndef " . gatename
   execute "normal! o#define " . gatename
@@ -259,7 +259,21 @@ function! s:insert_gates()
   execute "normal! Go#endif /* " . gatename . " */"
   normal! kk
 endfunction
-augroup includeguards
+" Automatically generate headers in various scripts
+function! s:insert_script_header(command)
+  set paste
+  execute "normal! i#!" . a:command
+  execute "normal! o#"
+  execute "normal! o# TODO: description"
+  execute "normal! o"
+  execute "normal! o"
+  set nopaste
+  normal! kkw
+endfunction
+augroup headers
 	autocmd!
-	autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
+	autocmd BufNewFile *.{h,hpp} call <SID>insert_C_gates()
+	autocmd BufNewFile *.py call <SID>insert_script_header("/usr/bin/env python")
+	autocmd BufNewFile *.sh call <SID>insert_script_header("/bin/sh")
+	autocmd BufNewFile Makefile call <SID>insert_script_header("/usr/bin/make")
 augroup END
