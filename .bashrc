@@ -19,6 +19,9 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+# Don't execute history commands directly, just place them on the command line
+shopt -s histverify
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -210,6 +213,8 @@ function todo
 	elif [[ -f "$PWD/TODO" ]]
 	then
 		cat "$PWD/TODO"
+  else
+    grep -nre "TODO"
 	fi
 }
 

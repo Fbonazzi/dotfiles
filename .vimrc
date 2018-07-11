@@ -242,3 +242,19 @@ augroup END
 :command -nargs=1 -complete=buffer Vsb vertical sb <args>
 " Override the non-existing builtin :vsb command to call our Vsb command
 :cabbrev vsb <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Vsb' : 'vsb')<CR>
+
+" Automatically generate include guards in C headers
+function! s:insert_gates()
+  let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
+  execute "normal! i#ifndef " . gatename
+  execute "normal! o#define " . gatename
+  execute "normal! o"
+  execute "normal! o"
+  execute "normal! o"
+  execute "normal! Go#endif /* " . gatename . " */"
+  normal! kk
+endfunction
+augroup includeguards
+	autocmd!
+	autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
+augroup END

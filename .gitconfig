@@ -18,5 +18,5 @@
 	shortgraph = "log --graph --oneline --all --decorate --topo-order"
 	graph = "log --graph --all --decorate --topo-order"
 	simplegraph = "log --graph --all --decorate --topo-order --simplify-by-decoration"
-	stash-unapply = "!git stash show -p | git apply -R"
+	stash-unapply = !git stash show -p | git apply -R
 	permission-reset = "!git diff -p | grep -E \"^(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply"

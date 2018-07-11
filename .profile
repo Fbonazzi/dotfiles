@@ -21,7 +21,8 @@ if [ -d "$HOME/bin" ] ; then
 	PATH="$HOME/bin:$PATH"
 fi
 
-# Add the pip user local directory
+# set PATH so it includes user's .local/bin if it exists
+# Used by e.g. pip, Kakoune
 if [ -d "$HOME/.local/bin" ]
 then
 	PATH="$HOME/.local/bin:$PATH"
