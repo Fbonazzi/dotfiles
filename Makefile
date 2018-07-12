@@ -1,8 +1,10 @@
 #!/usr/bin/make
 #
 # Install components to the user's home directory using GNU stow.
+SHELL := /bin/bash
 OLD_DOTFILES = ${HOME}/.old-dotfiles
 TARGETS = $(shell find . -maxdepth 1 -mindepth 1 -type d -name "[^\.]*" | sed 's/\.\///')
+STOW := $(shell command -v stow 2> /dev/null)
 
 $(shell mkdir -p $(OLD_DOTFILES))
 
@@ -38,6 +40,11 @@ endef
 all: $(TARGETS)
 
 $(TARGETS): %:
+ifndef STOW
+    $(error "Command 'stow' not found, but can be installed with:\
+	\
+	sudo apt install stow")
+endif
 ifeq ($(filter $@,$(TARGETS)),$@)
 	$(call save-old,$@)
 	stow --restow --target="${HOME}" $@
