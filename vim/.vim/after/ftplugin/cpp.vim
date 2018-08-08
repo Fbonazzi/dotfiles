@@ -1,4 +1,5 @@
 " Formatter
 " MM: Kernighan & Ritchie with 4-space tabs
-let b:formatter="astyle --mode=c --style=kr --indent=tab=4 --pad-header --unpad-paren"
-" You could use --align-pointer=name --align-reference=none"
+" Flags for Astyle 2.03
+" -j is --add-braces (unsupported in Astyle 2.03)
+let b:formatter="astyle --mode=c --style=kr --indent=tab=4 -j --indent-namespaces --indent-col1-comments --pad-oper --unpad-paren --pad-header --align-pointer=type --close-templates"
