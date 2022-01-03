@@ -5,15 +5,11 @@
 	default = simple
 [core]
 	excludesfile = ~/.gitignore
-[credential]
-	helper = cache --timeout=28800
-[color]
-	ui = auto
 [grep]
 	lineNumber = true
 [core]
 	editor = vim
-	pager = less -x1,5
+	pager = "less -eFiJM~ -j3"
 [alias]
 	shortgraph = "log --graph --oneline --all --decorate --topo-order"
 	graph = "log --graph --all --decorate --topo-order"
