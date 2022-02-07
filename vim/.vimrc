@@ -4,6 +4,11 @@ set nocompatible
 " Set line numbers
 set number
 
+" Use true colors
+if (has("termguicolors"))
+    set termguicolors
+endif
+
 let g:gruvbox_italic=1
 " Set theme and dark background
 colorscheme gruvbox
