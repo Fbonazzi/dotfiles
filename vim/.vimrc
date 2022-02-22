@@ -57,6 +57,10 @@ set lbr
 " Enable mouse
 set mouse=a
 
+" Set this to the name of your terminal that supports mouse codes.
+" Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
+set ttymouse=xterm2
+
 " Yank from cursor to end of line
 nnoremap Y y$
 
