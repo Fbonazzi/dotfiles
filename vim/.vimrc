@@ -64,6 +64,10 @@ set ttymouse=xterm2
 " Yank from cursor to end of line
 nnoremap Y y$
 
+" Netrw
+let g:netrw_browse_split = 1
+let g:netrw_liststyle = 3
+
 " Changes from last save
 function! s:DiffWithSaved()
     let filetype=&ft
